@@ -1,0 +1,7 @@
+export const LOAD_RECORD = 'LOAD_RECORD'
+export const ADD_RECORD = 'ADD_RECORD'
+export const FINISHED_RECORD = 'FINISHED_RECORD'
+export const REMOVE_RECORD = 'REMOVE_RECORD'
+export const ADD_NOTIES = 'ADD_NOTIES'
+export const FINISHED_NOTIES = 'FINISHED_NOTIES'
+export const REMOVE_NOTIES = 'REMOVE_NOTIES'
