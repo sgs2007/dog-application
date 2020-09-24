@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native'
+import { THEME } from '../theme'
 
 export const Note = ({note, onOpen}) => {
     
@@ -7,34 +8,35 @@ export const Note = ({note, onOpen}) => {
 
     return (
         <TouchableOpacity activeOpacity={0.7} onPress={() => onOpen(note)} >
-            <View style={styles.record}>
+            <View style={styles.item}>
                 <Text style={styles.date}>{date}</Text>
-                <Text style={styles.text}>{note}</Text>
+                <Text style={styles.text}>{note.text}</Text>
             </View>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    record: {
+    item: {
         overflow: "hidden",
         marginBottom: 15,
-        backgroundColor: '#5656FA',
         paddingVertical: 10,
         alignItems: "center",
         width: "100%",
-        height: 200,
+        height: 150,
+        borderRadius: 40,
+        borderWidth: 5,
+        borderColor: THEME.SECOND_MAIN,
     },
     date: {
-        color: '#fff',
         fontSize: 16,
         textAlign: "left",
         fontFamily: 'open-bold',
     },
     text: {
-        color: '#fff',
-        fontSize: 19,
-        fontFamily: 'open-regular',
+        fontSize: 20,
+        fontFamily: 'architect',
+        overflow: "hidden",
     }
     
 })

@@ -12,11 +12,11 @@ export const NoteScreen = ({navigation, route}) => {
 
     const noteId = route.params.noteId
     const date = new Date(route.params.date).toLocaleDateString()
-    const record = useSelector(state => state.record.allRecords.find(r => r.id === noteId))
+    const record = useSelector(state => state.record.allNoties.find(r => r.id === noteId))
 
-    const finishHandler = useCallback(() => {
-        dispatch(finishedRecord(record))
-    }, [record])
+    // const finishHandler = useCallback(() => {
+    //     dispatch(finishedRecord(record))
+    // }, [record])
 
     const removeHandler = () => {
         Alert.alert(
@@ -42,7 +42,7 @@ export const NoteScreen = ({navigation, route}) => {
       title: 'Record from ' + date,
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-          <Item title="Finished" iconName={iconName} onPress={finishHandler} />
+          <Item title="Finished" iconName={iconName} />
         </HeaderButtons>
       )
     })

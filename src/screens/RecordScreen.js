@@ -14,6 +14,10 @@ export const RecordScreen = ({navigation, route}) => {
     const date = new Date(route.params.date).toLocaleDateString()
     const record = useSelector(state => state.record.allRecords.find(r => r.id === recordId))
 
+    if(!record) {
+      return null
+    }
+
     const finishHandler = useCallback(() => {
         dispatch(finishedRecord(record))
     }, [record])
@@ -36,29 +40,27 @@ export const RecordScreen = ({navigation, route}) => {
           )
     }
 
-    const iconName = !record.finished ? "closesquare" : "checksquare"
+    const iconName = !record.finished ? "exclamationcircleo" : "checkcircleo"
 
     navigation.setOptions({
       title: 'Record from ' + date,
+      headerRight: () => (
+        <AntDesign name={iconName} size={30} color="#fff" style={styles.icons} />
+      ),
     })
 
-    if(!record) {
-      return null
-    }
+    
 
     return (
       <View style={styles.center}>
         <View style={styles.wrapperText}>
           <ScrollView>
-            <View style={styles.finishMarker}>
-              <AntDesign name={iconName} size={30} color={THEME.MAIN_COLOR} style={styles.icons} />
-            </View>
             <Text style={styles.text}>{record.text}</Text>
           </ScrollView>
         </View>
         <View style={styles.sourcePanel}>
           <Ionicons.Button name="ios-trash" size={32} color="#fff" style={styles.buttonItem} onPress={removeHandler} />
-          <Ionicons.Button name="md-checkmark-circle-outline" size={32} color="#fff" style={styles.buttonItem} />
+          <Ionicons.Button name="md-checkmark-circle-outline" size={32} color="#fff" style={styles.buttonItem} onPress={finishHandler} />
         </View>
       </View>
     )
@@ -73,23 +75,23 @@ const styles = StyleSheet.create({
     },
     wrapperText: {
       flex: 1,
-    },
-    finishMarker: {
-      width: "100%",
-      flex: 1,
-      alignItems: "flex-end",
+      borderColor: THEME.BUTTON_PANEL,
+      borderWidth: 2,
+      borderRadius: 30,
+      marginBottom: 10,
+      padding: 10,
     },
     labelIcon: {
       flex: 1,
     },
     icons: {
-      flex: 1,
+      marginRight: 10,
     },
     sourcePanel: {
       flex: 1,
       marginBottom: 10,
       maxHeight: 35,
-      backgroundColor: THEME.MAIN_COLOR,
+      backgroundColor: THEME.BUTTON_PANEL,
       borderRadius: 10,
       justifyContent: "space-around",
       flexDirection: "row",
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
     buttonItem: {
       flex: 1,
       textAlign: "center",
-      backgroundColor: THEME.MAIN_COLOR,
+      width: "100%",
+      backgroundColor: THEME.BUTTON_PANEL,
     },
 })

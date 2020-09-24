@@ -4,6 +4,7 @@ import { Note } from './Note'
 
 export const NotiesList = ({noties, onOpen}) => {
 
+
     if(!noties.length) {
         return (
             <View style={styles.wrapper}>
@@ -17,7 +18,7 @@ export const NotiesList = ({noties, onOpen}) => {
             <FlatList
                 data={noties}
                 keyExtractor={note => note.id.toString()}
-                renderItem={({item}) => <Note record={item} onOpen={onOpen} />}
+                renderItem={({item}) => <Note note={item} onOpen={onOpen} />}
             />
         </View>
     )

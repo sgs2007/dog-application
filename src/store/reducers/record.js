@@ -7,7 +7,6 @@ const initialState = {
 }
 
 export const recordReducer = (state = initialState, action) => {
-
     switch (action.type) {
         
         case LOAD_RECORD:

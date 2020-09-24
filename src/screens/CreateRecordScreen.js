@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         borderRadius: 10,
-        backgroundColor: THEME.MAIN_COLOR,
+        backgroundColor: THEME.SECOND_MAIN,
         minHeight: 35,
         justifyContent: "space-around",
     },

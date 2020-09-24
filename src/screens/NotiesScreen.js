@@ -9,19 +9,28 @@ import { loadRecord } from '../store/actions/record'
 
 export const NotiesScreen = ({navigation}) => {
 
+    const createNoteHandler = () => {
+        navigation.navigate("CreateNote")
+    }
+
     navigation.setOptions({
-        headerLeft: () => {
+        headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-                <Item />
+                <Item title="Toggle Drawer" iconName="ios-menu" onPress={()=>navigation.toggleDrawer()} />
             </HeaderButtons>
+        ),
+        headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                <Item title="Add note" iconName="md-add-circle-outline" onPress={createNoteHandler} /> 
+            </HeaderButtons>
+        ),
+        headerStyle: {
+            backgroundColor: THEME.SECOND_MAIN
         }
+            
     })
 
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(loadRecord())
-    }, [dispatch])
 
     if(loading) {
         return (

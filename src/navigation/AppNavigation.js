@@ -19,9 +19,9 @@ import { CreateNoteScreen } from '../screens/CreateNoteScreen'
 
 const navigatorOptions = {
     headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff'
+        backgroundColor: Platform.OS === 'android' ? THEME.SECOND_MAIN : '#fff'
     },
-    headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR
+    headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.SECOND_MAIN,
 }
 
 const RecordScreenStack = createStackNavigator()
@@ -118,7 +118,7 @@ function TabStackIos() {
     return (
         <TabIos.Navigator 
             tabBarOptions={{
-                activeTintColor: THEME.MAIN_COLOR,
+                activeTintColor: THEME.SECOND_MAIN,
         }}
         >
             <TabIos.Screen 
@@ -174,7 +174,9 @@ function TabStackAndroid() {
         <TabAndroid.Navigator
             shifting={true}
             barStyle={{
-                backgroundColor: THEME.MAIN_COLOR
+                backgroundColor: THEME.SECOND_MAIN,
+                margin: 5,
+                borderRadius: 20,
             }}
             activeColor="#fff"
         >
@@ -274,8 +276,6 @@ function MainNavigator() {
                     fontFamily: 'architect',
                     fontSize: 20,
                 },
-                itemStyle: {
-                }
             }}
         >
             <Drawer.Screen 

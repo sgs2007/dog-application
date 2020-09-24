@@ -1,29 +1,143 @@
-import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, View, Text, KeyboardAvoidingView, Keyboard, Button } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcon } from '../components/AppHeaderIcon'
+import { Ionicons, AntDesign, Octicons, MaterialIcons, Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
+import { THEME } from '../theme'
+import { TextInput } from 'react-native-gesture-handler'
+import { useDispatch } from 'react-redux'
+import { addRecord } from '../store/actions/record'
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export const CreateNoteScreen = ({navigation}) => {
+
+    const [text, setText] = useState('')
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('datetime');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
+    
+
+    const dispatch = useDispatch()
 
     navigation.setOptions({
         headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-                <Item title="Toggle Drawer" iconName="ios-menu" onPress={()=>navigation.toggleDrawer()} />
+                <Item title="Go back" iconName="md-arrow-round-back" onPress={()=>navigation.goBack()} />
             </HeaderButtons>
-        )
+        ),
+        headerStyle: {
+            backgroundColor: THEME.REMEMBER_SCREEN
+        }
     })
+    
+    const saveNoteHandler = () => {
+
+        const note = {
+            date: new Date().toJSON(),
+            text: text,
+            type: "noties",
+            finished: false,
+        }
+        setText('')
+        dispatch(addRecord(note))
+    }
+
+    const keyboardHandler = () => {
+        Keyboard.dismiss()
+    }
+
+    const cleanInputHandler = () => {
+        setText('')
+        setDate(new Date())
+    }
 
     return (
-        <View style={styles.center}>
-            <Text>CreateNoteScreen</Text>
-        </View>
+        <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : null} >
+            <View style={styles.center}>
+                <View style={styles.textarea}>
+                    <Text style={styles.date}>Remember me on: {date.toLocaleDateString()}</Text>
+                    <TextInput style={styles.textInput} value={text} onChangeText={setText} multiline />
+                </View>
+                <View style={styles.calendarContainer}>
+                    {show && (
+                        <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={mode}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                        />
+                    )}
+                </View>
+                <View style={styles.buttonPanel}>
+                    <Octicons.Button name="keyboard" color="#fff" style={styles.buttonItem} onPress={keyboardHandler} />
+                    <AntDesign.Button name="calendar" color="#fff" style={styles.buttonItem} onPress={showDatepicker} />
+                    <MaterialCommunityIcons.Button name="timetable" style={styles.buttonItem} onPress={showTimepicker} />
+                    <MaterialIcons.Button name="clear" color="#fff" style={styles.buttonItem} onPress={cleanInputHandler} />
+                    <Entypo.Button name="add-to-list" color="#fff" style={styles.buttonItem} onPress={saveNoteHandler} />
+                </View>
+            </View>
+        </KeyboardAvoidingView>
     )
 }
 
 const styles = StyleSheet.create({
     center: {
+        padding: 5,
+        paddingVertical: 10,
+        height: "100%",
+        justifyContent: "space-between",
+    },
+    textarea: {
+        flex: 1,
+        borderColor: THEME.REMEMBER_BORDER,
+        borderWidth: 3,
+        marginBottom: 10,
+        borderRadius: 30,
+    },
+    date: {
+        textAlign:"center",
+        borderBottomColor: THEME.REMEMBER_BORDER,
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+        marginHorizontal: 30,
+        fontSize: 17,
+    },
+    textInput: {
+        maxHeight: 150,
+        padding: 10,
+    },
+    buttonPanel: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
-    }
+        flexDirection: "row",
+        justifyContent: "space-around",
+        maxHeight: 40,
+        borderRadius: 30,
+        backgroundColor: THEME.REMEMBER_SCREEN,
+    },
+    buttonItem: {
+        backgroundColor: THEME.REMEMBER_SCREEN,
+        borderColor: THEME.REMEMBER_SCREEN,
+    },
 })

@@ -28,23 +28,13 @@ export const RecordList = ({records, onOpen}) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        padding: 2,
+        padding: 5,
         backgroundColor: "#fff",
     },
     wrapperContainer: {
-        backgroundColor: THEME.RECORD_COLOR,
-        padding: 8,
+        // backgroundColor: THEME.SECOND_MAIN,
+        padding: 2,
         height: "100%",
-        borderRadius: 8,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-
-        elevation: 5,
     },
     noItem: {
         fontFamily: 'open-bold',

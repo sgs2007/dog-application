@@ -14,7 +14,7 @@ export const loadRecord = () => {
     }
 }
 
-export const finishedRecord = record = async dispatch => {
+export const finishedRecord = record => async dispatch => {
 
     await DB.finishedRecord(record)
 
