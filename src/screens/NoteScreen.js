@@ -14,9 +14,9 @@ export const NoteScreen = ({navigation, route}) => {
     const date = new Date(route.params.date).toLocaleDateString()
     const record = useSelector(state => state.record.allNoties.find(r => r.id === noteId))
 
-    // const finishHandler = useCallback(() => {
-    //     dispatch(finishedRecord(record))
-    // }, [record])
+    const finishHandler = useCallback(() => {
+        dispatch(finishedRecord(record))
+    }, [record])
 
     const removeHandler = () => {
         Alert.alert(

@@ -18,11 +18,11 @@ export class Http {
         }
     }
 
-    static async putch(url, data={}) {
+    static async patch(url, data={}) {
         try {
-            return await request(url, "PUTCH", data)
+            return await request(url, "PATCH", data)
         } catch (error) {
-            console.log
+            console.log(error)
         }
     }
 

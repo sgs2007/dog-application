@@ -1,19 +1,21 @@
 import React from 'react'
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native'
-import { color } from 'react-native-reanimated'
+import { color, round } from 'react-native-reanimated'
 import { THEME } from '../theme'
 
 export const Record = ({record, onOpen}) => {
     
-    const date = new Date(record.date).toLocaleDateString()
+    const date = new Date(record.current_date).toLocaleDateString()
+    const next_date = new Date(record.next_date).toLocaleDateString()
     const finishIndicator = record.finished ? {backgroundColor: THEME.SUCCESS_COLOR} : {backgroundColor: THEME.WAIT_COLOR}
 
     return (
         <TouchableOpacity activeOpacity={0.7} onPress={() => onOpen(record)} >
             <View style={styles.item}>
                 <View style={styles.wrapperInfo}>
-                    <Text style={styles.date}>{date}</Text>
+                    <Text style={styles.date}>Create date: {date}</Text>
                     <View style={styles.finishContainer} >
+                        <Text style={styles.next_date}>Finished: {next_date}</Text>
                         <Text style={{...styles.finished, ...finishIndicator}}></Text>
                     </View>
                 </View>
@@ -30,10 +32,9 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         width: "100%",
         height: 130,
-        borderRadius: 40,
+        borderRadius: 20,
         alignItems: "center",
-        borderWidth: 5,
-        borderColor: THEME.SECOND_MAIN,
+        backgroundColor: THEME.ITEM_BACK,
     },
     wrapperInfo: {
         flexDirection: "row",
@@ -43,27 +44,38 @@ const styles = StyleSheet.create({
         flex: 1,
         color: "#000",
         fontSize: 16,
-        textAlign: "center",
+        textAlign: "left",
         fontFamily: 'open-bold',
+        paddingLeft: 10,
     },
     finishContainer: {
         flex: 1,
-        alignItems: "flex-end",
+        flexDirection: "row",
+        justifyContent: "flex-end",
+    },
+    next_date: {
+        flex: 1,
+        fontSize: 16,
+        fontFamily: 'open-bold',
+        paddingLeft: 10,
     },
     finished: {
         height: 15,
-        width: 15,
+        maxWidth: 15,
         borderRadius: 50,
-        marginTop: 5,
+        marginTop: 3,
         flex: 1,
-        marginRight: 30,
+        marginRight: 10,
     },
     text: {
-        flex: 2,
-        padding: 5,
+        flex: 1,
+        padding: 10,
         color: "#000",
         fontSize: 18,
         fontFamily: 'open-regular',
+        borderColor: "#000",
+        width: "100%",
+        textAlign: "justify",
     }
     
 })

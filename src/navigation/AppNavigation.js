@@ -175,8 +175,6 @@ function TabStackAndroid() {
             shifting={true}
             barStyle={{
                 backgroundColor: THEME.SECOND_MAIN,
-                margin: 5,
-                borderRadius: 20,
             }}
             activeColor="#fff"
         >

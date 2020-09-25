@@ -7,8 +7,8 @@ export const RecordList = ({records, onOpen}) => {
 
     if(!records.length) {
         return (
-            <View style={styles.wrapper}>
-                <Text style={styles.noItem}>Записей пока нет.....</Text>
+            <View style={styles.wrapperNoItem}>
+                <Text style={styles.noItem}>Empty list.....</Text>
             </View>
         )
     }
@@ -28,13 +28,17 @@ export const RecordList = ({records, onOpen}) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        padding: 5,
+        padding: 8,
+        backgroundColor: THEME.WRAPPER_BACK,
+    },
+    wrapperNoItem: {
         backgroundColor: "#fff",
     },
     wrapperContainer: {
-        // backgroundColor: THEME.SECOND_MAIN,
-        padding: 2,
+        padding: 7,
         height: "100%",
+        backgroundColor: "#fff",
+        borderRadius: 20,
     },
     noItem: {
         fontFamily: 'open-bold',

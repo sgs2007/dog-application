@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, KeyboardAvoidingView, Keyboard, Button } from 'react-native'
+import { StyleSheet, View, Text, KeyboardAvoidingView, Keyboard } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcon } from '../components/AppHeaderIcon'
-import { Ionicons, AntDesign, Octicons, MaterialIcons, Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
+import { AntDesign, Octicons, MaterialIcons, Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
 import { THEME } from '../theme'
 import { TextInput } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 export const CreateNoteScreen = ({navigation}) => {
 
     const [text, setText] = useState('')
-    const [date, setDate] = useState(new Date());
+    const [next_date, setDate] = useState(new Date());
     const [mode, setMode] = useState('datetime');
     const [show, setShow] = useState(false);
 
@@ -52,12 +52,15 @@ export const CreateNoteScreen = ({navigation}) => {
     const saveNoteHandler = () => {
 
         const note = {
-            date: new Date().toJSON(),
+            current_date: new Date().toJSON(),
+            next_date: next_date,
             text: text,
             type: "noties",
             finished: false,
         }
         setText('')
+        setDate(new Date())
+        navigation.navigate("Noties")
         dispatch(addRecord(note))
     }
 
