@@ -77,14 +77,14 @@ export const CreateNoteScreen = ({navigation}) => {
         <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : null} >
             <View style={styles.center}>
                 <View style={styles.textarea}>
-                    <Text style={styles.date}>Remember me on: {date.toLocaleDateString()}</Text>
+                    <Text style={styles.date}>Remember me on: {next_date.toLocaleDateString()}</Text>
                     <TextInput style={styles.textInput} value={text} onChangeText={setText} multiline />
                 </View>
                 <View style={styles.calendarContainer}>
                     {show && (
                         <DateTimePicker
                         testID="dateTimePicker"
-                        value={date}
+                        value={next_date}
                         mode={mode}
                         is24Hour={true}
                         display="default"
