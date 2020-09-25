@@ -9,12 +9,21 @@ import { RecordList } from '../components/RecordList'
 
 export const MainScreen = ({navigation}) => {
 
+    const createRecordHandler = () => {
+        navigation.navigate("CreateRecord")
+    }
+
     navigation.setOptions({
         headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
                 <Item title="Toggle Drawer" iconName="ios-menu" onPress={()=>navigation.toggleDrawer()} />
             </HeaderButtons>
-        )
+        ),
+        headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                <Item title="Add note" iconName="md-add-circle-outline" onPress={createRecordHandler} /> 
+            </HeaderButtons>
+        ),
     })
 
     const openHandler = (record) => {
