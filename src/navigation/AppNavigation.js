@@ -160,7 +160,7 @@ function TabStackIos() {
                             size={25}
                             color={info.color}
                         />
-                    )
+                    ),
                 }}
             />
         </TabIos.Navigator>
@@ -203,7 +203,8 @@ function TabStackAndroid() {
                             size={25}
                             color={info.color}
                         />
-                    )
+                    ),
+                    tabBarColor: THEME.REMEMBER_SCREEN,
                 }}
             />
             <TabAndroid.Screen 
@@ -217,7 +218,8 @@ function TabStackAndroid() {
                             size={25}
                             color={info.color}
                         />
-                    )
+                    ),
+                    tabBarColor: THEME.VAC_SCREEN,
                 }}
             />
         </TabAndroid.Navigator>

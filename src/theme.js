@@ -4,6 +4,7 @@ export const THEME = {
     REMEMBER_SCREEN: "#f2b046",
     REMEMBER_BORDER: "#ff9505",
     VAC_SCREEN: "#d1495b",
+    VAC_ITEM: "#ff6b6b",
     AREA_COLOR: "#83c5be",
     ITEM_BACK_COLOR: "rgba(252, 110, 126, 1)",
     BUTTON_PANEL: "#07a0c3",
@@ -14,5 +15,5 @@ export const THEME = {
     WAIT_COLOR: "#f2b046",
     WRAPPER_BACK: "#8d99ae",
     WRAPPER_BACK2: "#e5e5e5",
-    ITEM_BACK: "#8ecae6"
+    ITEM_BACK: "#8ecae6",
 }

@@ -1,24 +1,25 @@
 import React from 'react'
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native'
+import { color, round } from 'react-native-reanimated'
 import { THEME } from '../theme'
 
-export const Note = ({note, onOpen}) => {
+export const Record = ({vac, onOpen}) => {
     
-    const current_date = new Date(note.current_date).toLocaleDateString()
-    const next_date = new Date(note.next_date).toLocaleDateString()
-    const finishIndecator = note.finished ? {backgroundColor: THEME.SUCCESS_COLOR} : {backgroundColor: THEME.WAIT_COLOR}
+    const date = new Date(vac.current_date).toLocaleDateString()
+    const next_date = new Date(vac.next_date).toLocaleDateString()
+    const finishIndicator = vac.finished ? {backgroundColor: THEME.SUCCESS_COLOR} : {backgroundColor: THEME.WAIT_COLOR}
 
     return (
-        <TouchableOpacity activeOpacity={0.7} onPress={() => onOpen(note)} >
+        <TouchableOpacity activeOpacity={0.7} onPress={() => onOpen(record)} >
             <View style={styles.item}>
                 <View style={styles.wrapperInfo}>
-                    <Text style={styles.date}>Created: {current_date}</Text>
-                    <View style={styles.finishContainer}>
-                        <Text style={styles.next_date}>Next date: {next_date}</Text>
-                        <Text style={{...styles.finished, ...finishIndecator}}></Text>
+                    <Text style={styles.date}>Create date: {date}</Text>
+                    <View style={styles.finishContainer} >
+                        <Text style={styles.next_date}>Finished: {next_date}</Text>
+                        <Text style={{...styles.finished, ...finishIndicator}}></Text>
                     </View>
                 </View>
-                <Text style={styles.text}>{note.text}</Text>
+                <Text style={styles.text}>{vac.text}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -33,28 +34,30 @@ const styles = StyleSheet.create({
         height: 130,
         borderRadius: 20,
         alignItems: "center",
-        backgroundColor: THEME.REMEMBER_BORDER,
+        backgroundColor: THEME.VAC_ITEM,
     },
     wrapperInfo: {
         flexDirection: "row",
         justifyContent: "space-around"
+    },
+    date: {
+        flex: 1,
+        color: "#000",
+        fontSize: 16,
+        textAlign: "left",
+        fontFamily: 'open-bold',
+        paddingLeft: 10,
     },
     finishContainer: {
         flex: 1,
         flexDirection: "row",
         justifyContent: "flex-end",
     },
-    date: {
-        flex: 1,
-        fontSize: 16,
-        paddingLeft: 10,
-        textAlign: "left",
-        fontFamily: 'open-bold',
-    },
     next_date: {
         flex: 1,
         fontSize: 16,
-        fontFamily: 'open-bold'
+        fontFamily: 'open-bold',
+        paddingLeft: 10,
     },
     finished: {
         height: 15,
@@ -62,14 +65,14 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         marginTop: 3,
         flex: 1,
-        marginRight: 8,
+        marginRight: 10,
     },
     text: {
-        fontSize: 20,
-        fontFamily: 'architect',
         flex: 1,
         padding: 10,
         color: "#000",
+        fontSize: 18,
+        fontFamily: 'open-regular',
         borderColor: "#000",
         width: "100%",
         textAlign: "justify",

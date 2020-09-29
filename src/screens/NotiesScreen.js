@@ -25,7 +25,7 @@ export const NotiesScreen = ({navigation}) => {
             </HeaderButtons>
         ),
         headerStyle: {
-            backgroundColor: THEME.SECOND_MAIN
+            backgroundColor: THEME.REMEMBER_SCREEN
         }
             
     })

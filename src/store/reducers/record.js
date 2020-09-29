@@ -3,6 +3,7 @@ import { LOAD_RECORD, ADD_RECORD, REMOVE_RECORD, FINISHED_RECORD, FINISHED_NOTIE
 const initialState = {
     allRecords: [],
     allNoties: [],
+    allVac: [],
     loading: true,
 }
 
@@ -14,6 +15,7 @@ export const recordReducer = (state = initialState, action) => {
                 ...state,
                 allRecords: action.payload.filter(record => record.type === "record"),
                 allNoties: action.payload.filter(record => record.type === "noties"),
+                allVac: action.payload.filter(record => record.type === "vaccina"),
                 loading: false,
             }
         case FINISHED_RECORD:
